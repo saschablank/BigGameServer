@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
     }
     
     std::cout << "Starting ShipBattleServer..." << std::endl;
-    SqlQueryExecutor::set_connection("172.18.0.2", 3306, "shipbattle_user", "fu0zi2ooT6ahshei9LeoDi7puiL2ieX4", "shipbattle");
+   
     RestEndpointController rest_endpoint_controller;
 
     
@@ -74,8 +74,6 @@ int main(int argc, char* argv[]) {
     GetKeyEndpoint get_key_endpoint;
     rest_endpoint_controller.register_endpoint(&get_key_endpoint);
 
-    Webserver Webserver;
-    Webserver.start(4443, rest_endpoint_controller);
 
     asio::io_context io_context;
     GameServer server(io_context, 12345);
