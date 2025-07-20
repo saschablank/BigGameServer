@@ -41,3 +41,7 @@ The responsibility for connecting to new instances is delegated to the client.
 - **Register your endpoints:**  
   - Within the `registerEndpoints` function (which should be invoked inside your `startWebserver` method), instantiate your endpoint classes.
   - Use the `RestEndpointController` to register these instances for handling incoming requests.
+
+- **The `src/game` folder**
+  - This is our custom, game-specific implementation for the title currently in development.  
+    Feel free to use it as a reference or example for your own integrations.

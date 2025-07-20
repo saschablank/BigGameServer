@@ -1,3 +1,0 @@
-/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build/CMakeFiles/BigGameServer.dir
-/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build/CMakeFiles/edit_cache.dir
-/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build/CMakeFiles/rebuild_cache.dir

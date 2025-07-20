@@ -11,7 +11,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 link_directories(/usr/lib/x86_64-linux-gnu)
 
 add_executable(BigGameServer ${CMAKE_SOURCE_DIR}/src/main.cpp
-    ${CMAKE_SOURCE_DIR}/src/HttpClient.cpp
     ${CMAKE_SOURCE_DIR}/src/webserver/Webserver.cpp
     ${CMAKE_SOURCE_DIR}/src/webserver/RestEndpointController.cpp
     ${CMAKE_SOURCE_DIR}/src/game/GetKeyEndpoint.cpp
