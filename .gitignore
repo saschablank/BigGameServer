@@ -40,7 +40,12 @@
 # debug information files
 *.dwo
 
-/build/*
-/include/*
+build/*
+!build/.gitkeep
+include/*
 ShipBattleServer.code-workspace
 .vscode/*
+
+
+build/BigGameServer
+build/CMakeCache.txt

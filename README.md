@@ -18,7 +18,7 @@ Provides boilerplate code for building a TCP-based game server, including:
 * Abstractions for integrating game-specific logic
 * this allows developers to focus on gameplay implementation without dealing with low-level network handling.
 
-## Lightweight Container Orchestration (Controller)
+## Controller (Lightweight Container Orchestration)
 A built-in controller is capable of starting additional TCP game server instances in Docker containers
 once a defined number of matches has been reached.
 The responsibility for connecting to new instances is delegated to the client.
