@@ -1,13 +1,23 @@
 #include "AuthRestEndpoint.h"
+#include "../webserver/SessionManager.h"
+#include "../utils/Helper.h"
 
-void AuthRestEndpoint::handleRequest(const httplib::Request &req, httplib::Response &res)
+std::string AuthRestEndpoint::handleRequest(const httplib::Request &req)
 {
-    if (req.method == "POST") {
+    if (req.method == "GET") {
      
-        res.status = 200;
-        res.set_content("Authentication successful", "text/plain");
-    } else {
-        res.status = 405; // Method Not Allowed
-        res.set_content("Method not allowed", "text/plain");
+        if( req.path == "/auth/newsession" )
+        {
+            SessionManager& sessionManager = SessionManager::getInstance();
+            std::string session_id = sessionManager.createNewSession();
+            std::map<std::string, std::string> response_data{
+                {"status", "success"},
+                {"session_id", session_id}
+            };
+            return Helper::string_map_to_json_str(response_data);
+     
+        }
+        
     }
+    return std::string("Method not allowed", "text/plain");
 }

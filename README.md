@@ -47,3 +47,6 @@ The responsibility for connecting to new instances is delegated to the client.
 - **The `src/game` folder**
   - This is our custom, game-specific implementation for the title currently in development.  
     Feel free to use it as a reference or example for your own integrations.
+
+- **SQL Connectors**
+  - If you need a diffrent SQL connector driver. 

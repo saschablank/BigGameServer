@@ -8,7 +8,7 @@ class RestEndpoint {
 public:
     RestEndpoint() = default;
     virtual ~RestEndpoint() = default;  
-    virtual void handleRequest(const httplib::Request& req, httplib::Response& res) = 0;
+    virtual std::string handleRequest(const httplib::Request& req) = 0;
     virtual std::string getEndpointName() const {
         return endpoint_name;
     }

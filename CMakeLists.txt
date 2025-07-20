@@ -11,10 +11,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 link_directories(/usr/lib/x86_64-linux-gnu)
 
 add_executable(BigGameServer ${CMAKE_SOURCE_DIR}/src/main.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/MariaDbSqlQueryExecutor.cpp    
     ${CMAKE_SOURCE_DIR}/src/webserver/Webserver.cpp
     ${CMAKE_SOURCE_DIR}/src/webserver/RestEndpointController.cpp
+    ${CMAKE_SOURCE_DIR}/src/webserver/UserDataBase.cpp
     ${CMAKE_SOURCE_DIR}/src/game/GetKeyEndpoint.cpp
     ${CMAKE_SOURCE_DIR}/src/game/AuthRestEndpoint.cpp
-    ${CMAKE_SOURCE_DIR}/src/utils/SqlQueryExecutor.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/SqlTable.cpp
+    ${CMAKE_SOURCE_DIR}/src/webserver/WebSession.cpp
 ) 
 target_link_libraries(BigGameServer mariadbcpp.so)

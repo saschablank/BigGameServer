@@ -11,5 +11,5 @@ GetKeyEndpoint() {
     }
     virtual ~GetKeyEndpoint() = default;
 
-    void handleRequest(const httplib::Request& req, httplib::Response& res) override;
+    std::string handleRequest(const httplib::Request &req) override;
 };

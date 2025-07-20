@@ -8,7 +8,7 @@ class RestEndpointController {
 public:
     RestEndpointController() = default;
     ~RestEndpointController() = default;  
-    virtual void handleRequest(const std::string& endpoint_path, const httplib::Request& req, httplib::Response& res);
+    virtual void handleRequest(const std::string& endpoint_path, const httplib::Request& req);
     virtual void register_endpoint(RestEndpoint* endpoint);
     virtual const std::map<std::string, RestEndpoint*>& geEtndpoints() const {
         return endpoints;

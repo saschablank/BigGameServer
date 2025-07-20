@@ -14,7 +14,6 @@ public:
     virtual void startWebserver(int webserver_port=443) {
 
         Webserver Webserver;
-        RestEndpointController rest_endpoint_controller;
         registerEndpoints(rest_endpoint_controller);
         Webserver.start(webserver_port, rest_endpoint_controller);
     };
@@ -25,4 +24,6 @@ public:
     };
 
     virtual int run() = 0;
+protected:
+    RestEndpointController rest_endpoint_controller;
 };

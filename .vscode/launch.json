@@ -2,12 +2,14 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Debug ShipBattleServer",
+        "name": "Debug BigGameServer",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/ShipBattleServer",
+        "program": "${workspaceFolder}/build/BigGameServer",
         "args": [
-
+          "--type=controller",
+          "--web-port=4443",
+          "--game-port=7000"
         ],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",

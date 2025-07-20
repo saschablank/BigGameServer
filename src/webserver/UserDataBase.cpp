@@ -5,13 +5,13 @@ void UserDataBase::set_data(const std::string key, const UserDataValue value)
     data_store[key] = value;   
 }
 
-const UserDataValue& UserDataBase::get_data(const std::string key)
+const UserDataValue* UserDataBase::get_data(const std::string key)
 {
     auto it = data_store.find(key);
     if (it != data_store.end()) {
-        return it->second;
+        return &it->second;
     }
-    return UserDataValue(); // Return a default value if key not found
+    return nullptr;
 }
 
 void UserDataBase::remove_data(const std::string key)

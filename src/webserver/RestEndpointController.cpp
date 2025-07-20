@@ -2,15 +2,15 @@
 
 
 
-void RestEndpointController::handleRequest(const std::string &endpoint_path, const httplib::Request &req, httplib::Response &res)
+void RestEndpointController::handleRequest(const std::string &endpoint_path, const httplib::Request &req)
 {
     if (endpoints.find(endpoint_path) != endpoints.end()) {
         // Call the appropriate endpoint handler
-        endpoints[endpoint_path]->handleRequest(req, res);
+        endpoints[endpoint_path]->handleRequest(req);
     } else {
         // Endpoint not found, return 404
-        res.status = 404;
-        res.set_content("Endpoint not found", "text/plain");
+        
+        std::cerr << "Endpoint not found: " << endpoint_path << std::endl;
     }
 }
 

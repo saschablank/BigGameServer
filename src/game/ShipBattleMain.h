@@ -3,6 +3,8 @@
 #include "AuthRestEndpoint.h"
 #include "AvailabilityEndpoint.h"
 #include "GetKeyEndpoint.h"
+#include "../utils/MariaDbSqlQueryExecutor.h"
+
 
 class ShipBattleMain : public IMain {
 public:
@@ -13,14 +15,14 @@ public:
         _cmd_args = cmd_args;
     }
     void registerEndpoints(RestEndpointController& endpoint_controller) override {
-        AuthRestEndpoint auth_endpoint;
-        endpoint_controller.register_endpoint(&auth_endpoint);
+        AuthRestEndpoint* auth_endpoint = new AuthRestEndpoint();
+        endpoint_controller.register_endpoint(auth_endpoint);
         
-        AvailabilityEndpoint availability_endpoint;
-        endpoint_controller.register_endpoint(&availability_endpoint);
+        AvailabilityEndpoint* availability_endpoint = new AvailabilityEndpoint();
+        endpoint_controller.register_endpoint(availability_endpoint);
         
-        GetKeyEndpoint get_key_endpoint;
-        endpoint_controller.register_endpoint(&get_key_endpoint);
+        GetKeyEndpoint* get_key_endpoint = new GetKeyEndpoint();
+        endpoint_controller.register_endpoint(get_key_endpoint);
     
     }
     void printHelp() {
@@ -67,8 +69,13 @@ public:
             if (_cmd_args.find("web-port") != _cmd_args.end()) {
                 this->_web_port = std::stoi(_cmd_args["web-port"]);
                 startWebserver(this->_web_port);
+                
+                MariaDbSqlQueryExecutor query;
+                SqlTable table = SqlTable("user_sessions");
+                query.readTableColumns(table);
             }
-        }else if (_app_type == "controller" || _app_type == "game") {
+        }
+        if (_app_type == "controller" || _app_type == "game") {
             if (_cmd_args.find("game-port") != _cmd_args.end()) {
                 this->_game_port = std::stoi(_cmd_args["game-port"]);
                 startGameserver(this->_game_port);

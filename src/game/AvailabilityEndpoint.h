@@ -11,14 +11,11 @@ public:
     }
     virtual ~AvailabilityEndpoint() = default;
 
-    void handleRequest(const httplib::Request& req, httplib::Response& res) override{
+    std::string handleRequest(const httplib::Request& req) override{
         if (req.method == "GET") {
             // Handle availability check logic here
-            res.status = 200; // OK
-            res.set_content("{\"status\": \"success\"}", "application/json");
-        } else {
-            res.status = 405; // Method Not Allowed
-            res.set_content("Method not allowed", "text/plain");
+            return std::string("{\"status\": \"success\"}");
         }
+        return std::string("{\"status\": \"error\", \"message\": \"Method not allowed\"}");
     }
 };

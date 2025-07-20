@@ -7,8 +7,13 @@
 
 class Webserver {
 public:
-    Webserver(){}
-    ~Webserver(){}    
+    Webserver() = default;
+    // Disable copy constructor
+    Webserver(const Webserver&) = delete;
+
+    // Disable copy assignment operator
+    Webserver& operator=(const Webserver&) = delete;
+    ~Webserver() = default;
     void start(int port, const RestEndpointController& controller);
 
 private:

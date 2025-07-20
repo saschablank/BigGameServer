@@ -6,9 +6,9 @@ class AuthRestEndpoint : public RestEndpoint {
 public:
     AuthRestEndpoint() {
         endpoint_name = "AuthEndpoint";
-        endpoint_path = R"(/auth)";
+        endpoint_path = R"(/auth/(\w+))";
     }
     virtual ~AuthRestEndpoint() = default;
 
-    void handleRequest(const httplib::Request& req, httplib::Response& res) override;
+    std::string handleRequest(const httplib::Request& req) override;
 };

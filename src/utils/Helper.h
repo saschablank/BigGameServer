@@ -46,4 +46,16 @@ public:
         std::map<std::string, std::string> env_vars;
         return env_vars;
     }
+
+    static std::string string_map_to_json_str(std::map<std::string, std::string> map) {
+        std::string json_str = "{";
+        for (const auto& pair : map) {
+            if (json_str.size() > 1) {
+                json_str += ",";
+            }
+            json_str += "\"" + pair.first + "\":\"" + pair.second + "\"";
+        }
+        json_str += "}";
+        return json_str;
+    }
 };
