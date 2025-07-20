@@ -14,7 +14,6 @@ REST endpoints can be implemented as C++ classes, allowing clear and structured 
 
 ## TCP Game Server
 Provides boilerplate code for building a TCP-based game server, including:
-
 * Session and match management
 * Abstractions for integrating game-specific logic
 * this allows developers to focus on gameplay implementation without dealing with low-level network handling.
