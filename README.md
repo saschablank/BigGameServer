@@ -32,6 +32,8 @@ The responsibility for connecting to new instances is delegated to the client.
 
 - **Implement the interface defined in `/utils/IMain.h`.**  
   A default implementation is provided for the `startWebserver` and `startGameServer` functions, which can be extended or overridden as needed.
+  Instantiate your custom `IMain` implementation within `main.cpp`.
+  The `run` method in your `IMain` implementation acts as the application's entry point.
 
 - **To add a new REST endpoint:**  
   - Create a class that inherits from `webserver/RestEndpoint.h`.

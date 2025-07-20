@@ -24,10 +24,5 @@ public:
         io_context.run();
     };
 
-    virtual int run() {
-        startWebserver();
-
-        startGameserver();
-        return 0;
-    }
+    virtual int run() = 0;
 };
