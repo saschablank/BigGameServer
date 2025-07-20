@@ -6,6 +6,7 @@ BigGameServer consists of three main components:
 
 ##  Web Server with REST Endpoints
 A built-in web server can be accessed via REST endpoints.
+
 For database access, an MariaDB implementation is available using the official C++ connector:
 MariaDB C++ Connector Documentation
 
@@ -14,11 +15,9 @@ REST endpoints can be implemented as C++ classes, allowing clear and structured 
 ## TCP Game Server
 Provides boilerplate code for building a TCP-based game server, including:
 
-Session and match management
-
-Abstractions for integrating game-specific logic
-
-This allows developers to focus on gameplay implementation without dealing with low-level network handling.
+* Session and match management
+* Abstractions for integrating game-specific logic
+* this allows developers to focus on gameplay implementation without dealing with low-level network handling.
 
 ## Lightweight Container Orchestration (Controller)
 A built-in controller is capable of starting additional TCP game server instances in Docker containers
