@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/main.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/main.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/main.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/main.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/HttpClient.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/HttpClient.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/HttpClient.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/HttpClient.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/webserver/Webserver.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/webserver/Webserver.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/webserver/Webserver.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/webserver/Webserver.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/webserver/RestEndpointController.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/webserver/RestEndpointController.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/webserver/RestEndpointController.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/webserver/RestEndpointController.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/game/GetKeyEndpoint.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/game/GetKeyEndpoint.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/game/GetKeyEndpoint.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/game/GetKeyEndpoint.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/game/AuthRestEndpoint.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/game/AuthRestEndpoint.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/game/AuthRestEndpoint.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/game/AuthRestEndpoint.cpp.o"
+},
+{
+  "directory": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/BigGameServer.dir/src/utils/SqlQueryExecutor.cpp.o -c /media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/utils/SqlQueryExecutor.cpp",
+  "file": "/media/papapagan/1f89538b-96d0-407e-8902-4d969c68b8b7/gamedev/Aurora/ShipBattleServer/src/utils/SqlQueryExecutor.cpp",
+  "output": "CMakeFiles/BigGameServer.dir/src/utils/SqlQueryExecutor.cpp.o"
+}
+]
