@@ -8,7 +8,8 @@
 #include <sstream>
 #include <iomanip>
 #include "WebSession.h"
-
+#include "../utils/SqlTable.h"
+#include "../utils/MariaDbSqlQueryExecutor.h"
 
 class SessionManager {
     public:
@@ -44,7 +45,24 @@ class SessionManager {
     
     private:
     SessionManager() {
-            // Constructor logic
+            MariaDbSqlQueryExecutor query;
+            query.readTableColumns(_table);
+            SqlTableRecords db_sessions = query.readAllFromTable(_table);
+            for (const auto& row : db_sessions) {
+                std::shared_ptr<WebSession> new_session = std::make_shared<WebSession>(WebSession());
+                std::map<std::string, SqlFieldValue> field_values = row.second;
+                const std::string* user_id = std::get_if<std::string>(&field_values["user_id"]);
+                new_session->user_id = *user_id;
+                const int* logged_in = std::get_if<int>(&field_values["is_logged_in"]);
+                new_session->is_logged_in = *logged_in;
+                const std::string* session_expire = std::get_if<std::string>(&field_values["session_expired_at"]);
+                new_session->session_expire_at = *session_expire;
+
+                const std::string* session_id = std::get_if<std::string>(&field_values["session_id"]);
+                this->_sessions[*session_id] = new_session;
+                
+            }
+
         }
 
         ~SessionManager() {
@@ -69,4 +87,7 @@ class SessionManager {
     }
     
     std::map<std::string, std::shared_ptr<WebSession>> _sessions;
+    SqlTable _table = SqlTable("user_sessions", "id");
+    
+    
 };

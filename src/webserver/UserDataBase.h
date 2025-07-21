@@ -3,7 +3,7 @@
 #include <variant>
 #include <map>
 
-typedef std::variant<int, float, std::string> UserDataValue;
+typedef std::variant<int, double, std::string> UserDataValue;
 
 class UserDataBase{
     

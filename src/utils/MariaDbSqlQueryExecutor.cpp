@@ -69,8 +69,11 @@ void MariaDbSqlQueryExecutor::readTableColumns(SqlTable &table)
         
         while (res->next()) {
             std::string column_name = std::string(res->getString("Field"));
+            
             std::string column_type = std::string(res->getString("Type"));
-            table.columns[column_name] = column_type;
+            if( column_name != table.pk_column_name) {
+                table.columns[column_name] = column_type;
+            }
         }
     } catch (sql::SQLException &e) {
         std::cerr << "Error reading table columns: " << e.what() << std::endl;
@@ -79,4 +82,38 @@ void MariaDbSqlQueryExecutor::readTableColumns(SqlTable &table)
         std::cout<<it.first <<" : " << it.second<<std::endl;
     }
     conn->close();
+}
+
+SqlTableRecords MariaDbSqlQueryExecutor::readAllFromTable(SqlTable &table)
+{
+    SqlTableRecords records;
+    if( !conn ) {
+        connect();
+    }
+    try {
+        std::unique_ptr<sql::Statement> stmt(conn->createStatement());
+        std::string query = "SELECT * FROM " + table.table_name;
+        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery(query));
+        while (res->next()) {
+            int row_pk_value = res->getInt(table.pk_column_name);
+            records[row_pk_value] = std::map<std::string, SqlFieldValue>();
+            for( const auto& it : table.columns)
+            {
+                if(it.second.find("varchar") != std::string::npos || it.second.find("timestamp") != std::string::npos) //field is a string
+                {
+                    SqlFieldValue value = std::string(res->getString(it.first));
+                    records[row_pk_value][it.first] = value;
+                }
+                else if(it.second.find("int") != std::string::npos) // field is a int
+                {
+                    SqlFieldValue value = res->getInt(it.first);
+                    records[row_pk_value][it.first] = value;
+                }
+            }
+        }
+    } catch (sql::SQLException &e) {
+        std::cerr << "Error reading table : " << e.what() << std::endl;
+        return SqlTableRecords();
+    }
+    return records;
 }

@@ -69,10 +69,8 @@ public:
             if (_cmd_args.find("web-port") != _cmd_args.end()) {
                 this->_web_port = std::stoi(_cmd_args["web-port"]);
                 startWebserver(this->_web_port);
+                MariaDbSqlQueryExecutor::set_connection_details("172.18.02.2", 3306, "shipbattle","fu0zi2ooT6ahshei9LeoDi7puiL2ieX4", "shipbattle" );
                 
-                MariaDbSqlQueryExecutor query;
-                SqlTable table = SqlTable("user_sessions");
-                query.readTableColumns(table);
             }
         }
         if (_app_type == "controller" || _app_type == "game") {

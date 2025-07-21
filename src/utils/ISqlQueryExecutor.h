@@ -24,6 +24,7 @@ public:
     virtual ~ISqlQueryExecutor() = default;
 
     virtual void readTableColumns(SqlTable& table) = 0;
+    virtual SqlTableRecords readAllFromTable(SqlTable& table) = 0;
 
 protected:
     virtual void connect() = 0;

@@ -12,6 +12,7 @@ public:
     ~MariaDbSqlQueryExecutor() override;
     void connect() override;
     void readTableColumns(SqlTable& table) override;
+    SqlTableRecords readAllFromTable(SqlTable& table) override;
 
 private:
     sql::Driver* driver = nullptr;
