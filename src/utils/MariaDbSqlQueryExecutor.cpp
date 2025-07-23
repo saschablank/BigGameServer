@@ -21,39 +21,18 @@ MariaDbSqlQueryExecutor::~MariaDbSqlQueryExecutor()
 }
 
 
-/*
-void MariaDbSqlQueryExecutor::executeQuery(const std::string &query)
-{
-    try {
-        if (!conn) {
-            connect();
-        }
-        // Create a new Statement
-        std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
-        // Execute query
-        sql::ResultSet *res = stmnt->executeQuery("select * from users");
-        // Loop through and print results
-        while (res->next()) {
-            std::cout << "id = " << res->getInt(1);
-            std::cout << ", google_user_id = " << res->getString(2);
-            std::cout << ", playername = " << res->getString(3) << "\n";
-        }
-    }
-    catch(sql::SQLException& e){
-      std::cerr << "Error selecting users: " << e.what() << std::endl;
-   }
-   conn->close();
-
-}
-   */
-
 void MariaDbSqlQueryExecutor::connect()
 {
-    std::string url_str = "jdbc:mariadb://" + DB_IP +":" + std::to_string(DB_PORT) + "/" + DB_NAME;
-    sql::Properties properties({{"user", DB_USER}, {"password", DB_PASSWORD}});
-    this->conn = std::unique_ptr<sql::Connection>(driver->connect(url_str, properties));
-    if (!conn) {
-        throw std::runtime_error("Failed to connect to the database");
+    try {
+        sql::SQLString url("jdbc:mariadb://172.18.0.2:3306/shipbattle");
+
+        sql::Properties properties({
+            {"user", "shipbattle_user"},
+            {"password", "fu0zi2ooT6ahshei9LeoDi7puiL2ieX4"}
+        });
+        this->conn = std::unique_ptr<sql::Connection>(driver->connect(url, properties));
+    }catch (sql::SQLException &e) {
+        std::cerr << "Error reading table columns: " << e.what() << std::endl;
     }
 }
 
@@ -81,7 +60,6 @@ void MariaDbSqlQueryExecutor::readTableColumns(SqlTable &table)
     for( auto& it : table.columns){
         std::cout<<it.first <<" : " << it.second<<std::endl;
     }
-    conn->close();
 }
 
 SqlTableRecords MariaDbSqlQueryExecutor::readAllFromTable(SqlTable &table)
@@ -116,4 +94,51 @@ SqlTableRecords MariaDbSqlQueryExecutor::readAllFromTable(SqlTable &table)
         return SqlTableRecords();
     }
     return records;
+}
+
+bool MariaDbSqlQueryExecutor::insert_into(SqlTable &table, const SqlRecord &record_to_insert)
+{
+    if( !conn ) {
+        connect();
+    }
+    std::string field_names_to_insert;
+    std::string place_holder_pice;
+    for(const auto& it : record_to_insert) {
+        field_names_to_insert += it.first + ",";
+        place_holder_pice += "?,";
+    }
+    if (field_names_to_insert.empty() == false && place_holder_pice.empty() == false) {
+        field_names_to_insert.pop_back();
+        place_holder_pice.pop_back();
+    }
+    try {
+        std::unique_ptr<sql::PreparedStatement> stmt
+        (
+            conn->prepareStatement("INSERT INTO " + table.table_name + "(" + field_names_to_insert + ") VALUES (" + place_holder_pice + ")")
+        );
+        int counter = 1;
+        for(const auto& it : record_to_insert) {
+            std::string field_name = it.first;
+            if(table.columns.find(it.first) != table.columns.end()) {
+
+                std::string datatype = table.columns[field_name];
+                if(datatype.find("varchar") != std::string::npos) {
+                    stmt->setString(counter,std::get<std::string>(it.second));     
+                }
+                else if( datatype == "timestamp"){
+                    stmt->setDateTime(counter, std::get<std::string>(it.second));
+                }
+                else if(datatype.find("int") != std::string::npos) {
+                    stmt->setInt(counter, std::get<int>(it.second));
+                }
+
+            }
+            ++counter;
+        }
+        stmt->executeUpdate();
+    } catch (sql::SQLException& e) {
+        std::cerr << "SQL error: " << e.what() << std::endl;
+        return false;
+    }
+    return true;
 }

@@ -25,6 +25,29 @@
         ],
         "preLaunchTask": "build",
         "miDebuggerPath": "/usr/bin/gdb"
+      },
+      {
+        "name": "Run Tests BigGameServer",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/BigGameServer",
+        "args": [
+          "--runtests=true"
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build",
+        "miDebuggerPath": "/usr/bin/gdb"
       }
     ]
   }

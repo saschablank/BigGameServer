@@ -14,7 +14,8 @@ public:
     // Disable copy assignment operator
     Webserver& operator=(const Webserver&) = delete;
     ~Webserver() = default;
-    void start(int port, const RestEndpointController& controller);
+    void start(int port,  RestEndpointController& controller);
 
-private:
+protected:
+    httplib::Server _svr;
 };

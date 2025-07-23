@@ -27,6 +27,7 @@ The responsibility for connecting to new instances is delegated to the client.
 * httplib -> https://github.com/yhirose/cpp-httplib
 * asio -> https://think-async.com/Asio/
 * mariadb connector -> https://mariadb.com/docs/connectors/mariadb-connector-cpp/install-mariadb-connector-cpp
+* libbcrypt -> https://github.com/rg3/libbcrypt
 
 ## 🔧 Integration Guide
 

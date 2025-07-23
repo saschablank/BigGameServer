@@ -74,6 +74,8 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "ow-crypt.h": "c",
+        "fstream": "cpp"
     }
 }

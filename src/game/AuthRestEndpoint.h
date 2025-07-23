@@ -6,7 +6,7 @@ class AuthRestEndpoint : public RestEndpoint {
 public:
     AuthRestEndpoint() {
         endpoint_name = "AuthEndpoint";
-        endpoint_path = R"(/auth/(\w+))";
+        endpoint_path = "auth";
     }
     virtual ~AuthRestEndpoint() = default;
 

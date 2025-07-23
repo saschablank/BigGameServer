@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <vector>
 #include <map>
@@ -57,5 +58,17 @@ public:
         }
         json_str += "}";
         return json_str;
+    }
+
+    static std::map<std::string,std::string> ReadReqBodyParameters(const std::string& request_body, char split_char_parameter='&', char split_char_value_pairs='=') {
+        std::vector<std::string_view> parameters_split = Helper::split(request_body, split_char_parameter);
+        std::map<std::string,std::string> body_values;
+        for( const auto& parameter_field : parameters_split ){
+            std::vector<std::string_view> parameters_split = Helper::split(parameter_field, split_char_value_pairs);
+            if(parameters_split.size() > 1){
+                body_values[std::string(parameters_split[0])] = std::string(parameters_split[1]);
+            }
+        }
+        return body_values;
     }
 };

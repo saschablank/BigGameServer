@@ -5,8 +5,10 @@
 #include <memory>
 #include <mariadb/conncpp.hpp> 
 
+
 typedef std::variant<int,std::string, double>SqlFieldValue;
-typedef std::map<int, std::map<std::string, SqlFieldValue>> SqlTableRecords;
+typedef std::map<std::string, SqlFieldValue>SqlRecord;
+typedef std::map<int, SqlRecord> SqlTableRecords;
 
 
 class SqlTable{

@@ -4,12 +4,10 @@
 #include <string>
 #include <map>
 #include <memory>
-#include <random>
-#include <sstream>
-#include <iomanip>
 #include "WebSession.h"
 #include "../utils/SqlTable.h"
 #include "../utils/MariaDbSqlQueryExecutor.h"
+#include "../utils/BGSCrypto.h"
 
 class SessionManager {
     public:
@@ -28,26 +26,30 @@ class SessionManager {
             return _sessions.find(session_id) != _sessions.end();
         }
 
-        const std::string& createNewSession() {
+        std::string createNewSession() {
             std::string new_session_id = _generate_session_id();
-            _sessions[new_session_id] = std::make_shared<WebSession>();
-            return _sessions.find(new_session_id)->first;
+            std::string hashed_session_id = BGSCrypto::HashValue(new_session_id);
+            _sessions[hashed_session_id] = std::make_shared<WebSession>();
+            SqlRecord record;
+            record["session_id"] = SqlFieldValue(hashed_session_id);
+            _query.insert_into(_table, record);
+            return new_session_id;
         }
 
         std::shared_ptr<WebSession> getSession(const std::string& session_id) {
-            auto it = _sessions.find(session_id);
-            if (it != _sessions.end()) {
-                return it->second;
+            for(const auto& it : _sessions) {
+                if(BGSCrypto::CheckValue(session_id, it.first) == true) { // hashes match
+                    return it.second;
+                }
             }
             return nullptr; // Session not found
         }
 
     
-    private:
+private:
     SessionManager() {
-            MariaDbSqlQueryExecutor query;
-            query.readTableColumns(_table);
-            SqlTableRecords db_sessions = query.readAllFromTable(_table);
+            _query.readTableColumns(_table);
+            SqlTableRecords db_sessions = _query.readAllFromTable(_table);
             for (const auto& row : db_sessions) {
                 std::shared_ptr<WebSession> new_session = std::make_shared<WebSession>(WebSession());
                 std::map<std::string, SqlFieldValue> field_values = row.second;
@@ -70,7 +72,7 @@ class SessionManager {
         }
 
     
-    std::string _generate_session_id(size_t length = 64) {
+    std::string _generate_session_id(size_t length = 32) {
         std::random_device rd;
         std::mt19937_64 eng(rd()); // 64-bit Mersenne Twister
         std::uniform_int_distribution<uint64_t> dist;
@@ -88,6 +90,7 @@ class SessionManager {
     
     std::map<std::string, std::shared_ptr<WebSession>> _sessions;
     SqlTable _table = SqlTable("user_sessions", "id");
+    MariaDbSqlQueryExecutor _query;
     
     
 };
